@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Chore extends Model
 {
     use SoftDeletes;
+
     protected $fillable = [
         'title',
         'description',
         'is_done',
         'image'
+    ];
+
+    protected $casts = [
+        'is_done' => 'boolean',
     ];
 }

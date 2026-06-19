@@ -45,7 +45,7 @@
             </div>
 
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="{{ route('chores.update', $chore->id) }}" style="flex: 1; padding: 0.8rem; background: #f39c12; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; text-align: center; transition: all 0.3s ease; min-width: 120px;">✏️ Editar</a>
+                <a href="{{ route('chores.edit', $chore->id) }}" style="flex: 1; padding: 0.8rem; background: #f39c12; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; text-align: center; transition: all 0.3s ease; min-width: 120px;">✏️ Editar</a>
                 <a href="{{ route('chores.delete', $chore->id) }}" style="flex: 1; padding: 0.8rem; background: #e74c3c; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; text-align: center; transition: all 0.3s ease; min-width: 120px;">🗑️ Deletar</a>
                 <a href="{{ route('chores.index') }}" style="flex: 1; padding: 0.8rem; background: #95a5a6; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; text-align: center; transition: all 0.3s ease; min-width: 120px;">Voltar</a>
             </div>

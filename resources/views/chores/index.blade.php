@@ -46,7 +46,7 @@
 
                     <div style="display: flex; gap: 0.5rem; border-top: 1px solid #ecf0f1; padding-top: 1rem; margin: 0 1.5rem 1.5rem;">
                         <a href="{{ route('chores.show', $chore->id) }}" style="flex: 1; padding: 0.6rem; background: #667eea; color: white; text-decoration: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-align: center; transition: all 0.3s ease;">Ver</a>
-                        <a href="{{ route('chores.update', $chore->id) }}" style="flex: 1; padding: 0.6rem; background: #f39c12; color: white; text-decoration: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-align: center; transition: all 0.3s ease;">Editar</a>
+                        <a href="{{ route('chores.edit', $chore->id) }}" style="flex: 1; padding: 0.6rem; background: #f39c12; color: white; text-decoration: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-align: center; transition: all 0.3s ease;">Editar</a>
                         <a href="{{ route('chores.delete', $chore->id) }}" style="flex: 1; padding: 0.6rem; background: #e74c3c; color: white; text-decoration: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-align: center; transition: all 0.3s ease;">Deletar</a>
                     </div>
                 </div>

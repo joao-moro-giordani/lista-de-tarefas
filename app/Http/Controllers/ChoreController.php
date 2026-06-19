@@ -22,52 +22,67 @@ class ChoreController extends Controller
             'chore' => $chore
         ]);
     }
+    public function create()
+    {
+        return view('chores.create');
+    }
 
-    public function store(ChoreRequest $request) {
-        if ($request->isMethod('post')) {
-            $dados = $request->validated();
+    public function store(ChoreRequest $request)
+    {
+        $dados = $request->validated();
+        $dados['is_done'] = $request->boolean('is_done');
 
-            if ($request->hasFile('image')) {
-                $dados['image'] = $request->file('image')->store('images', 'public');
-            }
-
-            Chore::create($dados);
-            return redirect()->route('chores.index')->with('mensagem', 'Tarefa criada com sucesso!');
+        if ($request->hasFile('image')) {
+            $dados['image'] = $request->file('image')->store('images', 'public');
         }
 
-        return view('chores.create');
-    }   
+        Chore::create($dados);
+        return redirect()->route('chores.index')->with('mensagem', 'Tarefa criada com sucesso!');
+    }
 
-    public function update(ChoreRequest $request, $id)
+    public function edit($id)
     {
         $chore = Chore::findOrFail($id);
-        if ($request->isMethod('put')) {
-            $dados = $request->validated();
-            if ($request->hasFile('image')) {
-                if ($chore->image) {
-                    Storage::disk('public')->delete($chore->image);
-                }
-                $dados['image'] = $request->file('image')->store('images', 'public');
-            }
-            $chore->update($dados);
-            return redirect()->route('chores.index')->with('mensagem', 'Tarefa editada com sucesso!');
-        }
-
         return view('chores.edit', [
             'chore' => $chore,
         ]);
     }
 
-    public function delete($id) 
+    public function confirmDelete($id)
     {
         $chore = Chore::findOrFail($id);
-        if (request()->isMethod('delete')) {
-            $chore->delete();
-            return redirect()->route('chores.index')->with('mensagem', 'Tarefa excluída com sucesso!');
-        }
-
         return view('chores.delete', [
             'chore' => $chore,
         ]);
+    }
+
+    public function update(ChoreRequest $request, $id)
+    {
+        $chore = Chore::findOrFail($id);
+        $dados = $request->validated();
+        $dados['is_done'] = $request->boolean('is_done');
+
+        if ($request->hasFile('image')) {
+            if ($chore->image) {
+                Storage::disk('public')->delete($chore->image);
+            }
+            $dados['image'] = $request->file('image')->store('images', 'public');
+        }
+        $chore->update($dados);
+        return redirect()->route('chores.index')->with('mensagem', 'Tarefa editada com sucesso!');
+    }
+
+    public function delete($id)
+    {   
+        $chore = Chore::findOrFail($id);
+
+        if ($chore->image) {
+            Storage::disk('public')->delete($chore->image);
+        }
+
+        $chore->delete();
+
+        return redirect()->route('chores.index')
+            ->with('mensagem', 'Tarefa excluída com sucesso!');
     }
 }
